@@ -1,0 +1,25 @@
+form input{
+    margin: 0 0px 5px 0px;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#error-message{
+    color: red;
+}
+
+#books-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 50px;
+    width: 100%;
+}
+
+.books-card {
+    display: flex;
+    flex-direction: column;
+    
+}
