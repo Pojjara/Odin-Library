@@ -77,6 +77,7 @@ function displayBooks(){
 
         const divRead = document.createElement('div')
         divRead.classList.add('div-read')
+        
         if(arrayItem.read == true){
             divRead.textContent = 'Read'
         }
@@ -92,7 +93,6 @@ function displayBooks(){
     })
 
     setDataAttributes()
-    createDeleteButton()
 }
 
 displayBooks()
@@ -124,6 +124,15 @@ function setDataAttributes(){
     }
 }
 
-function createDeleteButton(){
+const addedBooks = document.querySelectorAll('.books-card')
+    addedBooks.forEach(book => {
+        book.addEventListener('click', function removeBook(){
+            const booktoremove = book
+            book.remove()
+        })
 
-}
+    let del = document.createElement('BUTTON');
+    del.classList.add('delBtn')
+    del.textContent = 'x'
+    book.appendChild(del)
+}) 
