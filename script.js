@@ -104,25 +104,31 @@ function displayBooks(){
     })
 
     setDataAttributes()
+    addSubmitButton()
+    AddBookButton()
+    addDelButton()
+    changeReadStatus()
 }
 
 displayBooks()
-
-const sumbitButton = document.querySelector('#btn');
-sumbitButton.addEventListener('click', btnClick);
-sumbitButton.addEventListener('click', addBookToLibrary);
-function btnClick(event){
-    event.preventDefault();
+function addSubmitButton(){
+    const sumbitButton = document.querySelector('#btn');
+    sumbitButton.addEventListener('click', btnClick);
+    sumbitButton.addEventListener('click', addBookToLibrary);
+    function btnClick(event){
+        event.preventDefault();
+    }   
 }
 
 
 ///// Add Book button code
-
-const addBook = document.querySelector('.addbook');
-addBook.addEventListener('click', function(){
-    addBook.hidden = true
-    document.querySelector('.form').hidden = false;
-});
+function AddBookButton(){
+    const addBook = document.querySelector('.addbook');
+    addBook.addEventListener('click', function(){
+        addBook.hidden = true
+        document.querySelector('.form').hidden = false;
+    });
+}
 
 /////
 
@@ -137,27 +143,25 @@ function setDataAttributes(){
 
 /////// Delete button stuff
 
-// Creating button
-let divForDel = document.createElement('div');
-divForDel.classList.add('btn-container')
-let del = document.createElement('BUTTON');
-del.classList.add('btn')
-del.classList.add('btn-del')
-del.textContent = 'Remove'
-divForDel.appendChild(del)
-
-//
-
 // Function to add delete button to each book card
-const card = document.querySelectorAll('.books-card')
-card.forEach(book=>{
-    book.prepend(divForDel)
-})
-//
+function addDelButton(){
+    const card = document.querySelectorAll('.books-card')
+    card.forEach(book=>{
+        // Creating button
 
+        let divForDel = document.createElement('div');
+        divForDel.classList.add('btn-container')
+        let del = document.createElement('BUTTON');
+        del.classList.add('btn')
+        del.classList.add('btn-del')
+        del.textContent = 'Remove'
+        divForDel.appendChild(del)
 
-// Functionality to remove book when remove button clicked
-const addedBooks = document.querySelectorAll('.btn-del')
+        //
+        book.prepend(divForDel)
+    })
+
+    const addedBooks = document.querySelectorAll('.btn-del')
     addedBooks.forEach(book => {
         book.addEventListener('click', function removeBook(){
             const booktoremove = book.parentElement.parentElement
@@ -166,7 +170,31 @@ const addedBooks = document.querySelectorAll('.btn-del')
         })
     
 }) 
+}
 
-//
+function changeReadStatus(){
+    const allreadstatuses = document.querySelectorAll('.btn-readstatus')
+        allreadstatuses.forEach(book => {
+            book.addEventListener('click', function (){
 
-///////
+                if(book.style['background-color'] == 'red'){
+                    book.style['background-color'] = 'Green'
+                    book.textContent = 'Read: Yes'
+                    let newReadStatus = true
+                    indexOfBook = book.parentElement.parentElement.dataset.index
+                    updateReadStatus(indexOfBook,newReadStatus)
+                }
+                else if(book.style['background-color'] == 'green') {
+                    book.style['background-color'] = 'Red'
+                    book.textContent = "Read: No"
+                    let newReadStatus = false
+                    indexOfBook = book.parentElement.parentElement.dataset.index
+                    updateReadStatus(indexOfBook,newReadStatus)
+                }
+            })
+        })
+}
+
+function updateReadStatus(index, newContent){
+    myLibrary[index].read = newContent
+}
