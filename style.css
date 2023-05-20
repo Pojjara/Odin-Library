@@ -1,3 +1,9 @@
+body{
+    color: white;
+    background-color: #03071e;
+}
+
+
 form input{
     margin: 0 0px 5px 0px;
 }
@@ -21,5 +27,35 @@ form input{
 .books-card {
     display: flex;
     flex-direction: column;
+    border-radius: 5px;
+    min-height: 100px;
+    max-height: 500px;
+    min-width: 100px;
+    max-width: 500px;
+    padding: 20px;
+    background-color: #370617;
     
+}
+
+.books-card div{
+    margin-bottom: 5px;
+}
+
+.btn-container{
+    display: flex;
+    justify-content: center;
+}
+
+.btn-del {
+    border: none;
+    border-radius:2px;
+    background-color: #eb8787;
+}
+
+.btn-readstatus {
+    width: 100%;
+}
+
+.div-read {
+    display: flex;
 }

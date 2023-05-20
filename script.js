@@ -65,24 +65,35 @@ function displayBooks(){
 
         const divTitle = document.createElement('div');
         divTitle.classList.add('div-title')
-        divTitle.textContent = arrayItem.title
+        divTitle.textContent = 'Title: ' + arrayItem.title
 
         const divAuthor = document.createElement('div');
         divAuthor.classList.add('div-author')
-        divAuthor.textContent = arrayItem.author
+        divAuthor.textContent = 'Author: ' + arrayItem.author
 
         const divPages = document.createElement('div');
         divPages.classList.add('div-pages')
-        divPages.textContent = arrayItem.pages
+        divPages.textContent = 'Pages: ' + arrayItem.pages
 
         const divRead = document.createElement('div')
         divRead.classList.add('div-read')
+        const divReadButton = document.createElement('button')
+        divReadButton.classList.add('btn')
+        divReadButton.classList.add('btn-readstatus')
+
+        divRead.appendChild(divReadButton)
+
+        
         
         if(arrayItem.read == true){
-            divRead.textContent = 'Read'
+            divReadButton.style['background-color'] = 'Green'
+            divReadButton.style['border'] = 'none'
+            divReadButton.textContent = 'Read: Yes'
         }
         else {
-            divRead.textContent = "Didn't Read yet"
+            divReadButton.style['background-color'] = 'Red'
+            divReadButton.style['border'] = 'none'
+            divReadButton.textContent = "Read: No"
         }
 
         div.appendChild(divTitle)
@@ -124,15 +135,38 @@ function setDataAttributes(){
     }
 }
 
-const addedBooks = document.querySelectorAll('.books-card')
+/////// Delete button stuff
+
+// Creating button
+let divForDel = document.createElement('div');
+divForDel.classList.add('btn-container')
+let del = document.createElement('BUTTON');
+del.classList.add('btn')
+del.classList.add('btn-del')
+del.textContent = 'Remove'
+divForDel.appendChild(del)
+
+//
+
+// Function to add delete button to each book card
+const card = document.querySelectorAll('.books-card')
+card.forEach(book=>{
+    book.prepend(divForDel)
+})
+//
+
+
+// Functionality to remove book when remove button clicked
+const addedBooks = document.querySelectorAll('.btn-del')
     addedBooks.forEach(book => {
         book.addEventListener('click', function removeBook(){
-            const booktoremove = book
-            book.remove()
+            const booktoremove = book.parentElement.parentElement
+            booktoremove.remove()
+        
         })
-
-    let del = document.createElement('BUTTON');
-    del.classList.add('delBtn')
-    del.textContent = 'x'
-    book.appendChild(del)
+    
 }) 
+
+//
+
+///////
